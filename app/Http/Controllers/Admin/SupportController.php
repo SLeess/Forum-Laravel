@@ -14,4 +14,20 @@ class SupportController extends Controller
 
         return view("admin.support.index", compact('supports'));
     }
+
+    public function create(){
+
+        return view("admin/support/create");
+    }
+
+    public function store(Request $request){
+        $support = new Support();
+        $support->subject = $request->subject;
+        $support->status = $request->status;
+        $support->body = $request->body;
+        // dd($request->all());
+        $support->save();
+
+        return redirect('/')->with('msg', 'Novo suporte cadastrado!');
+    }
 }
