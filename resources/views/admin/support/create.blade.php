@@ -10,6 +10,11 @@
 </head>
 <body>
     <h1 class="text-center">Novo Suporte</h1>
+    @if($errors->any())
+        @foreach ($errors->all() as $erro)
+            <p class="text-center">{{ $erro }}</p>
+        @endforeach
+    @endif
     <div class="align-items-center">
         <form action="{{ route('supports.store') }}" method="POST" class="g-3 p-5 mx-5">
             @csrf()
@@ -17,27 +22,13 @@
             <div class="row mb-3">
                 <label for="inputAssunto3" class="col-sm-4 col-form-label">Título do assunto</label>
                 <div class="col-sm-8">
-                    <input type="text" placeholder="Assunto do suporte" name="subject" class="form-control"/>
+                    <input type="text" placeholder="Assunto do suporte" name="subject" class="form-control"/ value="{{ old('subject') }}">
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="inputStatus3" class="col-sm-4 col-form-label">Status</label>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="status" value="a">
-                    <label class="form-check-label" for="inputA">Ativo</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="status" value="p">
-                    <label class="form-check-label" for="inputP">Parado</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="status" value="c">
-                    <label class="form-check-label" for="inputC">Concluido</label>
-                </div>
             <div class="row mb-3">
                 <label for="inputBody3" class="col-sm-4 col-form-label">Descrição do Suporte</label>
                 <div class="col-sm-8">
-                    <textarea name="body" class="form-control" cols="5" rows="10" placeholder="Descrição"></textarea>
+                    <textarea name="body" class="form-control" cols="5" rows="10" placeholder="Descrição">{{ old('body') }}</textarea>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
