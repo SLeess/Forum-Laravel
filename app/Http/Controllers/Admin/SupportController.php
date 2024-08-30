@@ -77,6 +77,7 @@ class SupportController extends Controller
         if(!$support)
             return back();
 
+        //return redirect()->route('supports.show', $support->id);
         return redirect()->route('supports.index');
     }
 
@@ -85,16 +86,5 @@ class SupportController extends Controller
         //$support->delete();
         $this->service->delete($id);
         return redirect()->route('supports.index');
-    }
-
-    private function EncontrarOuVoltar(string|int $id){
-        //$support = Support::find($id);
-        //if(!$support)
-        if($support = $this->service->findOne($id))
-            return back();
-
-        //collect($support);
-
-        return $support;
     }
 }
