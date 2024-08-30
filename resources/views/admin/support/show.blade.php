@@ -7,8 +7,5 @@
 </ul>
 
 <form action="{{ route('supports.destroy', $support->id) }}" method="post">
-    @csrf()
-    @method('DELETE')
-    <button class="btn btn-warning" type="submit">Apagar Registro</button>
+    <x-delete-support/>
 </form>
-

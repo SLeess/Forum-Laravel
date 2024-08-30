@@ -1,4 +1,4 @@
-@extends('admin.components.html')
+@extends('admin.partials.html')
 
 @section('title', 'Fórum 2.0')
 
@@ -7,7 +7,7 @@
 @endsection
 
 @section('flashMessage')
-@extends('admin.components.flashMessage')
+@extends('admin.partials.flashMessage')
 @endsection
 
 @section('content')

@@ -82,9 +82,8 @@ class SupportController extends Controller
     }
 
     public function destroy(string|int $id){
-        $support = $this->EncontrarOuVoltar($id);
-        //$support->delete();
         $this->service->delete($id);
+
         return redirect()->route('supports.index');
     }
 }
