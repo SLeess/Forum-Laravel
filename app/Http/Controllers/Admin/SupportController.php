@@ -22,15 +22,13 @@ class SupportController extends Controller
 
     public function index(Request $request){
         $supports = $this->service->getAll($request->filter);//Support::all();
+
         return view("admin.support.index", compact('supports'));
     }
 
     public function show(string|int $id){
-        //Support::find($id);
-        //Support::where('id', $id)->first();
-        //Support::where('id', '!=', $id)->first();
-        $support = $this->EncontrarOuVoltar($id);
-
+        if(!$support = $this->service->findOne($id))
+            return back();
         return view('admin/support/show', compact('support'));
     }
 
@@ -78,8 +76,6 @@ class SupportController extends Controller
 
         if(!$support)
             return back();
-
-        $support->update($request->validated());
 
         return redirect()->route('supports.index');
     }

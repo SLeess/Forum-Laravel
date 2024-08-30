@@ -40,7 +40,7 @@ class SupportService{
             //string|int $id, string $subject, string $status, string $body
     public function update(UpdateSupportDTO $dto): stdClass|null //caso passe um id inválido
     {
-        return $this->repository->update(UpdateSupportDTO::makeFromRequest($dto));
+        return $this->repository->update($dto);
     }
 
     public function delete(string|int $id): void

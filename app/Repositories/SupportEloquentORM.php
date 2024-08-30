@@ -25,14 +25,11 @@ class SupportEloquentORM implements SupportRepositoryInterface{
                     ->toArray();
     }
     public function findOne(string|int $id): stdClass|null{
-        if(is_int(gettype($id)))
-            $id = strval($id);
-
         $support = $this->model->find($id);
 
         if(!$support) return null;
 
-        return (object) $suppport->toArray();
+        return (object) $support->toArray();
     }
     public function delete(string|int $id): void{
         if(is_int(gettype($id)))
