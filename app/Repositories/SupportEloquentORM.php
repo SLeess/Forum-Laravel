@@ -6,12 +6,28 @@ use stdClass;
 use App\DTO\{CreateSupportDTO,UpdateSupportDTO};
 use App\Models\Admin\Support;
 use App\Repositories\SupportRepositoryInterface;
+use App\Presenter\PaginationPresenter;
 
 class SupportEloquentORM implements SupportRepositoryInterface{
     //podemos extender o model, ou melhor ainda, injetá-lo no construtor
     public function __construct(
         protected Support $model
     ){}
+
+    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginateInterface
+    {
+        $result = $this->model
+                    ->where(function ($query) use ($filter){
+                        if($filter){
+                            $query->where('subject', '==', $filter);
+                            $query->orWhere('body', 'like', '%{$filter}%');
+                        }
+                    })
+                    //total de itens por página,      quais itens é pra trazer no select,     nome do parâmetro,       qual é a página atual
+                    ->paginate($totalPerPage, ['*'], "page", $page);
+
+        return new PaginationPresenter($result);
+    }
 
     public function getAll(string $filter = null): array{
         return $this->model

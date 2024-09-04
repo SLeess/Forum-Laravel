@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use stdClass;
+use App\Repositories\PaginateInterface;
 use App\DTO\{CreateSupportDTO,UpdateSupportDTO};
 use App\Repositories\SupportRepositoryInterface;
 
@@ -14,6 +15,11 @@ class SupportService{
     }
         //Forma de definir o padrão de retorno em laravel
         //Retornar sempre array
+    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginateInterface
+    {
+        return $this->repository->paginate(page: $page, totalPerPage: $totalPerPage, filter: $filter);
+    }
+
     public function getAll(string $filter = null): array|null
     {
         return $this->repository->getAll($filter);

@@ -30,17 +30,18 @@
                 'c' => 'Concluido'
             ];
         @endphp
-        @foreach ($supports as $support)
+        @foreach ($supports->items() as $support)
             <tr>
                 <th scope="row">#</th>
-                <td>{{ $support['subject'] }}</td>
-                <td>{{ $status[$support['status']] }}</td>
-                <td>{{ $support['body'] }}</td>
-                <td><a class="btn btn-primary" href="{{ route('supports.show', $support['id']) }}">Ver mais</a></td>
-                <td><a class="btn btn-warning" href="{{ route('supports.edit', $support['id']) }}">Editar</a></td>
+                <td>{{ $support->subject }}</td>
+                <td>{{ $status[$support->status] }}</td>
+                <td>{{ $support->body }}</td>
+                <td><a class="btn btn-primary" href="{{ route('supports.show', $support->id) }}">Ver mais</a></td>
+                <td><a class="btn btn-warning" href="{{ route('supports.edit', $support->id) }}">Editar</a></td>
             </tr>
         @endforeach
     </tbody>
 </table>
-<a class="btn btn-primary" href="{{ route('supports.create') }}">Nova listagem</a>
+<x-pagination :paginator="$supports" :appends="$filters"/>
+<a class="btn btn-primary mt-3" href="{{ route('supports.create') }}">Nova listagem</a>
 @endsection
