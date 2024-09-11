@@ -75,7 +75,7 @@ class SupportController extends Controller
         // $support->save();
 
         // $support->update($request->only(['subject', 'body']));
-
+        dd("teste");
         $support = $this->service->update(UpdateSupportDTO::makeFromRequest($request));
 
         if(!$support)

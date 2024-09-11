@@ -1,5 +1,4 @@
 @csrf()
-@yield('method-except-POST')
 {{-- <input type="text" value="{{ csrf_token() }}" name="_token" hidden> --}}
 <div class="row mb-3">
     <label for="inputAssunto3" class="col-sm-4 col-form-label">Título do assunto</label>
