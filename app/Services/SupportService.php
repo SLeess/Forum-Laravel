@@ -4,7 +4,7 @@ namespace App\Services;
 
 use stdClass;
 use App\Repositories\PaginateInterface;
-use App\DTO\{CreateSupportDTO,UpdateSupportDTO};
+use App\DTO\Supports\{CreateSupportDTO,UpdateSupportDTO};
 use App\Repositories\SupportRepositoryInterface;
 
 class SupportService{

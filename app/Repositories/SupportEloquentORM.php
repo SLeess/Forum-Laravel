@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use stdClass;
-use App\DTO\{CreateSupportDTO,UpdateSupportDTO};
+use App\DTO\Supports\{CreateSupportDTO,UpdateSupportDTO};
 use App\Models\Admin\Support;
 use App\Repositories\SupportRepositoryInterface;
 use App\Presenter\PaginationPresenter;

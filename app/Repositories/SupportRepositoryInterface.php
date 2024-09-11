@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use stdClass;
 
-use App\DTO\{CreateSupportDTO,UpdateSupportDTO};
+use App\DTO\Supports\{CreateSupportDTO,UpdateSupportDTO};
 use App\Repositories\PaginateInterface;
 
 interface SupportRepositoryInterface{

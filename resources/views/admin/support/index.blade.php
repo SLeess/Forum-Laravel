@@ -23,18 +23,11 @@
         </tr>
     </thead>
     <tbody>
-        @php
-            $status = [
-                'a' => 'Ativo',
-                'p' => 'Parado',
-                'c' => 'Concluido'
-            ];
-        @endphp
         @foreach ($supports->items() as $support)
             <tr>
                 <th scope="row">#</th>
                 <td>{{ $support->subject }}</td>
-                <td>{{ $status[$support->status] }}</td>
+                <td>{{ getStatusSupport($support->status) }}</td>
                 <td>{{ $support->body }}</td>
                 <td><a class="btn btn-primary" href="{{ route('supports.show', $support->id) }}">Ver mais</a></td>
                 <td><a class="btn btn-warning" href="{{ route('supports.edit', $support->id) }}">Editar</a></td>

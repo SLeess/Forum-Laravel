@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use function PHPUnit\Framework\returnSelf;
 use App\Http\Requests\StoreUpdateSupportRequest;
-use App\DTO\{CreateSupportDTO,UpdateSupportDTO};
+use App\DTO\Supports\{CreateSupportDTO,UpdateSupportDTO};
 
 class SupportController extends Controller
 {
