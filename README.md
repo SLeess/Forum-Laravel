@@ -1,66 +1,94 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+ <img width="100px" src="public/img/logo.svg" align="center" alt="Logo" />
+ <h2 align="center">Support System</h2>
+
+> [!NOTE]\
+> This project is currently under development. Some features may be incomplete or inactive.
+> Created by [@SLeess](https://github.com/SLeess)
 </p>
 
-## About Laravel
+## Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The Support System is a web application built with Laravel, designed to manage support tickets efficiently. It includes features for creating, editing, and viewing support tickets, as well as managing them via a user-friendly interface. The system employs best practices in software development, including a service-oriented architecture, security measures, and pagination for improved usability.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Create, edit, and delete support tickets.
+- View individual support ticket details.
+- Dashboard to manage support tickets for authenticated users.
+- User authentication to access restricted features.
+- Adaptation for different screen sizes, ensuring a responsive experience on mobile devices, tablets, and desktops.
+- Login system with account register - **(In progress)**
+- Filtered search by Dates and Subject - **(In progress)**
+- Profile photos for each user incorporated into the page design - **(In progress)**
+- Contact with support - **(In progress)**
+- Log of past or deleted tickets - **(In progress)**
 
-## Learning Laravel
+## Project Architecture
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+The project follows a well-defined architecture to ensure maintainability and scalability:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. **Services and Repositories**: The application uses a service-oriented architecture, where business logic is encapsulated within service classes. This approach adheres to the principles of separation of concerns and promotes reusability and testability.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. **DTOs (Data Transfer Objects)**: DTOs are utilized to encapsulate data transferred between the layers of the application, ensuring that data structures are consistent and manageable.
 
-## Laravel Sponsors
+3. **Security**: Several security measures have been implemented, including validation rules defined in `StoreUpdateSupportRequest` to prevent unauthorized input. This ensures that only valid and safe data is processed.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+4. **Pagination**: A pagination system has been integrated to manage large sets of support tickets efficiently, enhancing the user experience by loading data in chunks.
 
-### Premium Partners
+5. **Containerization**: The project uses Docker for containerization, which simplifies setup and deployment. The Docker configuration includes:
+   - **Laravel Container**: Contains the Laravel application and is pre-configured with PHP.
+   - **MySQL Container**: Manages the database and is set up with environment variables for secure connection.
+   - **Redis Container**: Used for caching and session management.
+   - **Mailpit Container**: Provides a local email server for development and testing.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Routes
 
-## Contributing
+The application includes the following routes:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- `GET /`: Displays the index page with a list of support tickets.
+- `GET /supports/create`: Shows the form to create a new support ticket.
+- `POST /supports/store`: Submits the form to store a new support ticket.
+- `GET /supports/{id}/edit`: Displays the form to edit an existing support ticket.
+- `PUT /supports/{id}`: Updates the support ticket.
+- `GET /supports/{id}`: Shows details of a specific support ticket.
+- `DELETE /supports/{id}`: Deletes a support ticket.
 
-## Code of Conduct
+## Installation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+To start the Laravel project using Docker, run the following command in your Ubuntu terminal:
 
-## Security Vulnerabilities
+```bash
+curl -s "https://laravel.build/<PROJECT_NAME>?with=mysql,redis,mailpit" | bash
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+If `curl` is not installed, you can install it with:
 
-## License
+```bash
+sudo apt install curl -y
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+To address potential permission issues, run:
+
+```bash
+chmod -R gu+w storage
+chmod -R guo+w storage
+php artisan cache:clear
+```
+<!--
+## Project Screenshots
+
+<a target="_blank" align="center" style="display: inline-block;">
+  <img align="left" top="500" width="550" alt="png" src="https://i.imgur.com/zkQEkb2.png">
+</a>
+
+<!> A Home page of this project with some previously entered data
+<br><br><br>
+In the same image, you can see a navbar adapted from Livewire, enabling Login, registration, and configuration of the profile in use, in addition to, of course, using the system's functionalities to register events.
+<br><br><br><br>-->
+
+## Contact
+
+For more information, contact me through the support page, or send an email to duraesleandro12@gmail.com
+
+---
