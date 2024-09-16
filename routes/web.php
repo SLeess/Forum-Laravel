@@ -4,10 +4,7 @@ use App\Enums\SupportStatus;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{SupportController};
 
-Route::get("/test", function () {
-    // dd(array_column(SupportStatus::cases(), 'name'));
-    dd(array_column(SupportStatus::cases(), 'value', 'name')['A']);
-});
+//Route::resource('/supports', SupportController::class);
 
 Route::get("/supports/{id}/edit", [SupportController::class, 'edit'])->name('supports.edit');
 
