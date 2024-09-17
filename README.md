@@ -71,101 +71,131 @@ This guide will help you set up the Laravel Forum project using Docker, clone th
 1. **Open Your Terminal**:
    - If you're using WSL, open your WSL terminal.
 
-2. **Create a Laravel Project with Docker**:
-   - Use the following command to create a new Laravel project with Docker. Replace `<PROJECT_NAME>` with your desired project name:
+---
+
+### Steps to Install and Configure Docker + Laravel from Scratch
+
+#### 1. **Install Docker**
+   - **On Windows / macOS**: 
+     - Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop).
+     - Follow the installation instructions and restart your PC after installation.
+   - **On Linux**:
+     - Follow the installation instructions on the official Docker website for your Linux distribution ([Docker Linux Install](https://docs.docker.com/engine/install/)).
+
+#### 2. **Install Docker Compose**
+   - Docker Compose is generally included with Docker on Windows and macOS. If you're using Linux and Docker Compose is not installed, you can manually install it:
      ```bash
-     curl -s "https://laravel.build/<PROJECT_NAME>?with=mysql,redis,mailpit" | bash
+     sudo apt update
+     sudo apt install docker-compose
      ```
 
-3. **Navigate to Your Project Directory**:
-   - Change to the directory of your newly created project:
+#### 3. **Set Up Laravel from Scratch with Docker**
+
+##### 1. **Create a Laravel Project or Clone an Existing One**
+
+   - **If you already have a Laravel project on GitHub**:
      ```bash
-     cd <PROJECT_NAME>
+     git clone https://github.com/SLeess/Forum-Laravel.git
+     cd Forum-Laravel
      ```
 
-### 2. **Clone Your Existing Project**
-
-1. **Clone Your Project Repository**:
-   - Replace `<REPOSITORY_URL>` with the URL of your Git repository:
+   - **Or if you want to create a Laravel project with Docker from scratch**:
      ```bash
-     git clone <REPOSITORY_URL> .
+     curl -s "https://laravel.build/Forum-Laravel?with=mysql,redis,mailpit" | bash
+     cd Forum-Laravel
      ```
 
-2. **Ensure the `.env` File Exists**:
-   - Copy the example environment file to `.env`:
+##### 2. **Check if Docker is Active and Running**
+   - Ensure Docker is running properly:
+     ```bash
+     docker --version
+     docker-compose --version
+     ```
+
+
+#### 3. **Ensure Docker is Running and Install Composer Dependencies**
+
+   Once Docker and Docker Compose are installed, you should confirm that Docker is running properly. After that, it's crucial to install the project's dependencies, especially when working with Laravel. To do this, you will use Docker to run Composer inside a container.
+
+   - Run the following command:
+     ```bash
+        docker run --rm \
+       -u "$(id -u):$(id -g)" \
+       -v $(pwd):/var/www/html \
+       -w /var/www/html \
+       laravelsail/php82-composer:latest \
+       composer install
+        ```
+
+   - This process may take some time, probably more than 1200 seconds
+
+##### 4. **Set Up the `.env` File**
+   - Copy the `.env.example` file to `.env`:
      ```bash
      cp .env.example .env
      ```
 
-### 3. **Configure Environment Variables**
-
-1. **Set Environment Variables**:
-   - Open the `.env` file in your project's root directory and add or verify the following environment variables:
-     ```env
+   - Open the `.env` file and modify the variables:
+     - Set the application name.
+     - Configure the database port and credentials.
+     - And set this property:
+     ```bash
      WWWUSER=1000
      WWWGROUP=1000
      ```
 
-2. **Update `docker-compose.yml`**:
-   - Ensure the `docker-compose.yml` file includes these environment variables under the `laravel.test` service:
-     ```yaml
-     services:
-       laravel.test:
-         build:
-           context: ./vendor/laravel/sail/runtimes/8.3
-           dockerfile: Dockerfile
-           args:
-             WWWUSER: '${WWWUSER}'
-             WWWGROUP: '${WWWGROUP}'
-         ...
-     ```
-
-### 4. **Build and Start Docker Containers**
-
-1. **Build Docker Containers**:
-   - Run the following command to build the Docker containers:
-     ```bash
-     docker-compose build
-     ```
-
-2. **Start Docker Containers**:
-   - Start the containers in detached mode:
+##### 5. **Start Docker Containers**
+   - Navigate to the Laravel project directory and start the containers:
      ```bash
      docker-compose up -d
      ```
 
-### 5. **Install Composer Dependencies**
+   - This process may take some time, like 1200 or more.
 
-1. **Install Dependencies**:
-   - Execute the following command to install Composer dependencies inside the Laravel container:
+   - **If you encounter a "path not found" error**, run the following command to ensure the dependencies are installed:
      ```bash
      docker-compose exec laravel.test composer install
      ```
 
-2. **Set Directory Permissions**:
-   - Ensure the `storage` and `bootstrap/cache` directories are writable:
+##### 6. **Generate the Application Key**
+   - Generate the Laravel application key:
+     ```bash
+     docker-compose exec laravel.test php artisan key:generate
+     ```
+
+##### 7. **Run the Migrations**
+   - Run the database migrations:
+     ```bash
+     docker-compose exec laravel.test php artisan migrate
+     ```
+
+##### 8. **Set Folder Permissions**
+   - Ensure the permissions are correct:
      ```bash
      docker-compose exec laravel.test chmod -R 775 storage
      docker-compose exec laravel.test chmod -R 775 bootstrap/cache
      ```
 
-### 6. **Generate Application Key**
-
-- After installing dependencies, generate the application key:
-  ```bash
-  docker-compose exec laravel.test php artisan key:generate
-  ```
-
-### 7. **Verify and Access the Application**
-
-1. **Check Docker Logs**:
-   - If it encounter issues, check the logs of the Laravel container:
+##### 9. **Restart the Containers**
+   - Restart the containers after everything is configured:
      ```bash
-     docker-compose logs laravel.test
+     docker-compose down
+     docker-compose up -d
      ```
 
-2. **Access the Application**: 
-   - Open the browser and navigate to `http://localhost` to see if your Laravel application is running correctly.
+##### 10. **Access the Application**
+   - Open your browser and navigate to `http://localhost:<port_defined_in_env>` to access the Laravel application.
+
+### Common Issues and Solutions
+1. **Missing dependencies error (vendor)**:
+   - Ensure you run the `composer install` command inside the container.
+   - If the issue persists, run:
+     ```bash
+     docker-compose exec laravel.test composer update
+     ```
+
+2. **Permission error**:
+   - Check the permissions for the `storage` and `bootstrap/cache` folders. If necessary, use the `chmod` command as shown in step 7.
 
 ## Contact
 
