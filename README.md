@@ -176,6 +176,13 @@ This guide will help you set up the Laravel Forum project using Docker, clone th
      docker-compose exec laravel.test chmod -R 775 bootstrap/cache
      ```
 
+   - Or maybe this in the same docker:
+     ```bash
+     chmod -R gu+w storage
+     chmod -R guo+w storage
+     php artisan cache:clear
+     ```
+
 ##### 9. **Restart the Containers**
    - Restart the containers after everything is configured:
      ```bash
