@@ -30,8 +30,6 @@ class SupportService{
         return $this->repository->findOne($id);
     }
                     //store da api
-
-
     public function new(
         //string $subject, string $status, string $body //isso é má prática, precisamos usar o partner DTO, pois poderia haver muitos atributos para fazer o registro
         CreateSupportDTO $dto

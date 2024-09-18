@@ -31,12 +31,13 @@ class StoreUpdateSupportRequest extends FormRequest
             ],
         ];
 
-        if ($this->method() === 'PUT'){
+        if ($this->method() === 'PUT' || $this->method() === 'PATCH') {
+            $id = $this->support ?? $this->id;
             $rules['subject'] = [
-                'required',
+                'required', //nullable
                 'min:3',
                 'max:255',
-                Rule::unique('supports')->ignore($this->id),
+                Rule::unique('supports')->ignore($id),
             ];
             //OUTRA FORMA DE RESOLVER O PROBLEMA
             /*$rules['subject'] = [

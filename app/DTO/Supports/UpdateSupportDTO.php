@@ -17,8 +17,14 @@ class UpdateSupportDTO
     }
            //método estático                        //retorna um objeto da própria classe
 
-    public static function makefromRequest(StoreUpdateSupportRequest $request): self
+    public static function makefromRequest(StoreUpdateSupportRequest $request, $id = null): self
     {
-        return new self($request->id, $request->subject, SupportStatus::A , $request->body);
+        return new self(
+            //if exists $id, consider that one, if not, use $request->id
+            $id ?? $request->id,
+            $request->subject,
+            SupportStatus::A ,
+            $request->body
+        );
     }
 }

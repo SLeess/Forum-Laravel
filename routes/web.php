@@ -3,8 +3,9 @@
 use App\Enums\SupportStatus;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{SupportController};
+use App\Http\Controllers\Api\SupportAPIController;
 
-//Route::resource('/supports', SupportController::class);
+//  Route::resource('/supports', SupportController::class]);
 
 Route::get("/supports/{id}/edit", [SupportController::class, 'edit'])->name('supports.edit');
 
@@ -21,3 +22,8 @@ Route::get("/supports/{id}", [SupportController::class, 'show'])->name('supports
 //as urls de rotas podem ser repetidas desde que o método HTTP seja diferente,
 
 Route::delete('/supports/{id}', [SupportController::class, 'destroy'])->name('supports.destroy');
+
+
+/*
+ *-----------API-----------------
+ */

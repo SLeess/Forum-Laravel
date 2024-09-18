@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\{SupportEloquentORM, SupportRepositoryInterface};
+use Illuminate\Support\Facades\Route;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,4 +28,5 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
 }
