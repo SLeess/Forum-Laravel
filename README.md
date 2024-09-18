@@ -21,6 +21,7 @@ The Support System is a web application built with Laravel, designed to manage s
 - API architecture application.
 - Optimizations in the API architecture.
 - Login system with account register - **(In progress)**
+- Optimizations in the design and UI/UIX systems of the project - **(In progress)**
 - Filtered search by Dates and Subject - **(In progress)**
 - Profile photos for each user incorporated into the page design - **(In progress)**
 - Contact with support - **(In progress)**
