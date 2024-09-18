@@ -18,6 +18,8 @@ The Support System is a web application built with Laravel, designed to manage s
 - Dashboard to manage support tickets for authenticated users.
 - User authentication to access restricted features.
 - Adaptation for different screen sizes, ensuring a responsive experience on mobile devices, tablets, and desktops.
+- API architecture application.
+- Optimizations in the API architecture.
 - Login system with account register - **(In progress)**
 - Filtered search by Dates and Subject - **(In progress)**
 - Profile photos for each user incorporated into the page design - **(In progress)**
@@ -42,6 +44,31 @@ The project follows a well-defined architecture to ensure maintainability and sc
    - **Redis Container**: Used for caching and session management.
    - **Mailpit Container**: Provides a local email server for development and testing.
 
+6. **API Development**: The API is a crucial part of the system, providing endpoints for interacting with the support tickets programmatically. The following API routes are available:
+- `GET /api/example`
+  - **Description**: A test route to verify that the API is working.
+  - **Response**: `{"message": "API route is working"}`
+
+- `GET /api/supports`
+  - **Description**: Retrieves a list of all support tickets.
+  - **Controller**: `Api\SupportController@index`
+
+- `POST /api/supports`
+  - **Description**: Creates a new support ticket.
+  - **Controller**: `Api\SupportController@store`
+
+- `GET /api/supports/{support}`
+  - **Description**: Retrieves details of a specific support ticket.
+  - **Controller**: `Api\SupportController@show`
+
+- `PUT /api/supports/{support}`
+  - **Description**: Updates an existing support ticket.
+  - **Controller**: `Api\SupportController@update`
+
+- `DELETE /api/supports/{support}`
+  - **Description**: Deletes a support ticket.
+  - **Controller**: `Api\SupportController@destroy`
+
 ## Routes
 
 The application includes the following routes:
@@ -53,6 +80,23 @@ The application includes the following routes:
 - `PUT /supports/{id}`: Updates the support ticket.
 - `GET /supports/{id}`: Shows details of a specific support ticket.
 - `DELETE /supports/{id}`: Deletes a support ticket.
+
+## API Routes
+
+The application also includes the following API routes:
+
+- `GET /api/example`: Returns a JSON response to verify the API is working.
+- `GET /api/supports`: Retrieves a list of all support tickets.
+- `POST /api/supports`: Creates a new support ticket.
+- `GET /api/supports/{support}`: Retrieves details of a specific support ticket by its ID.
+- `PUT /api/supports/{support}`: Updates the support ticket with the specified ID.
+- `DELETE /api/supports/{support}`: Deletes the support ticket with the specified ID.
+
+Other system routes include:
+
+- `GET /api/user`: Retrieves the authenticated user.
+- `GET /sanctum/csrf-cookie`: Fetches the CSRF token for authentication.
+
 
 ## Installation
 ### Setting Up Your Laravel Project with Docker
