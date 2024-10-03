@@ -17,11 +17,9 @@ class SupportEloquentORM implements SupportRepositoryInterface{
     public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginateInterface
     {
         $result = $this->model
-                    ->where(function ($query) use ($filter){
-                        if($filter){
-                            $query->where('subject', '==', $filter);
-                            $query->orWhere('body', 'like', '%{$filter}%');
-                        }
+                    ->when($filter, function ($query) use ($filter) {
+                        $query->where('subject', 'like', "%{$filter}%")
+                            ->orWhere('body', 'like', "%{$filter}%");
                     })
                     //total de itens por página,      quais itens é pra trazer no select,     nome do parâmetro,       qual é a página atual
                     ->paginate($totalPerPage, ['*'], "page", $page);
