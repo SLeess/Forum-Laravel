@@ -1,20 +1,15 @@
-@extends('admin.partials.html')
+@extends('admin.layouts.app')
+@section('title', 'Editar a  Dúvida {{ $support->subject }}')
 
-@section('title', 'Editar Suporte')
-
-@section('title-body')
-<h1 class="text-center">Suporte: {{ $support->id }}</h1>
+@section('header')
+<h1 class="text-lg text-black-500">Editar Dúvida: {{ $support->subject }}</h1>
 @endsection
 
-<x-alert/>
-
 @section('content')
-<div class="align-items-center">
-    <form action="{{ route('supports.update', $support->id ) }}" method="POST" class="g-3 p-5 mx-5">
-        @method('PUT')
-        @include('admin.partials.form', ['action' => 'Editar'])
-        {{-- @section('method-except-POST')
-            @method('PUT')
-        @endsection --}}
-    </form>
-</div>
+<form action="{{ route('supports.update', $support->id) }}" method="POST">
+    @method('PUT')
+    @include('admin.partials.form', [
+        'textButton' => 'Editar Registro'
+    ])
+</form>
+@endsection

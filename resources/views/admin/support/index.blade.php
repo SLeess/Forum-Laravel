@@ -1,40 +1,18 @@
-@extends('admin.partials.html')
+{{-- @extends('admin.partials.html') --}}
+@extends('admin.layouts.app')
 
 @section('title', 'Fórum 2.0')
 
-@section('title-body')
-<h1>Listagem de Suportes</h1>
+@section('header')
+    @include('admin.partials.header', compact('supports'))
 @endsection
 
 @section('flashMessage')
-@extends('admin.partials.flashMessage')
+    @include('admin.partials.flashMessage')
 @endsection
 
 @section('content')
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col"></th>
-            <th scope="col">Assunto</th>
-            <th scope="col">Status</th>
-            <th scope="col">Descrição</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($supports->items() as $support)
-            <tr>
-                <th scope="row">#</th>
-                <td>{{ $support->subject }}</td>
-                <td>{{ getStatusSupport($support->status) }}</td>
-                <td>{{ $support->body }}</td>
-                <td><a class="btn btn-primary" href="{{ route('supports.show', $support->id) }}">Ver mais</a></td>
-                <td><a class="btn btn-warning" href="{{ route('supports.edit', $support->id) }}">Editar</a></td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
-<x-pagination :paginator="$supports" :appends="$filters"/>
-<a class="btn btn-primary mt-3" href="{{ route('supports.create') }}">Nova listagem</a>
+    @include('admin.partials.content', [
+        "color" => "blue"
+    ])
 @endsection

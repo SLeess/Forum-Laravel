@@ -54,7 +54,7 @@ class SupportController extends Controller
         $this->service->new(CreateSupportDTO::makeFromRequest($request));
             //bad ´pratice
         /* return redirect('/')->with('msg', 'Novo suporte cadastrado!');*/
-        return redirect()->route('supports.index')->with('msg', 'Novo suporte cadastrado!');
+        return redirect()->route('supports.index')->with('success', 'Nova dúvida cadastrada com sucesso!');
     }
 
     public function edit(string|int $id){//, Support $support){
@@ -82,12 +82,12 @@ class SupportController extends Controller
             return back();
 
         //return redirect()->route('supports.show', $support->id);
-        return redirect()->route('supports.index');
+        return redirect()->route('supports.index')->with('success', 'Dúvida atualizada com sucesso!');
     }
 
     public function destroy(string|int $id){
         $this->service->delete($id);
 
-        return redirect()->route('supports.index');
+        return redirect()->route('supports.index')->with(['success' => 'Registro deletado com sucesso!']);
     }
 }

@@ -22,30 +22,20 @@ class StoreUpdateSupportRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->support ?? $this->id;
         $rules =  [
-            'subject' => '|required|min:3|max:255|unique:supports',
-            'body' => [
-                'required',
-                'min:3',
-                'max:100000',
-            ],
-        ];
-
-        if ($this->method() === 'PUT' || $this->method() === 'PATCH') {
-            $id = $this->support ?? $this->id;
-            $rules['subject'] = [
+            'subject' => [
                 'required', //nullable
                 'min:3',
                 'max:255',
                 Rule::unique('supports')->ignore($id),
-            ];
-            //OUTRA FORMA DE RESOLVER O PROBLEMA
-            /*$rules['subject'] = [
-                'required|min:3|max:255|unique:supports,subject,{$this->id},id',
-
-                ///ele é unico na tabela supports, mas adicionei uma exceção pra quando o id que estou enviando para update seja igual ao valor da coluna id já no banco
-            ]*/
-        }
+            ],
+            'body' => [
+                'required',
+                'min:3',
+                'max:1000',
+            ],
+        ];
 
         return $rules;
     }

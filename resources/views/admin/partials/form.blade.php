@@ -1,15 +1,5 @@
+<x-alert/>
 @csrf()
-{{-- <input type="text" value="{{ csrf_token() }}" name="_token" hidden> --}}
-<div class="row mb-3">
-    <label for="inputAssunto3" class="col-sm-4 col-form-label">Título do assunto</label>
-    <div class="col-sm-8">
-        <input type="text" placeholder="Assunto do suporte" name="subject" class="form-control"/ value="{{ $support->subject ?? old('subject') }}">
-    </div>
-</div>
-<div class="row mb-3">
-    <label for="inputBody3" class="col-sm-4 col-form-label">Descrição do Suporte</label>
-    <div class="col-sm-8">
-        <textarea name="body" class="form-control" cols="5" rows="10" placeholder="Descrição">{{ $support->body ?? old('body') }}</textarea>
-    </div>
-</div>
-<button type="submit" class="btn btn-primary">@yield('action') Suporte</button>
+<input type="text" placeholder="Assunto" name="subject" value="{{ $support->subject ?? old('subject') }}" class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
+<textarea name="body" cols="30" rows="5" placeholder="Descrição" class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">{{ $support->body ?? old('body') }}</textarea>
+<button type="submit" class="px-4 py-2 font-bold text-white bg-purple-500 rounded shadow hover:bg-purple-400 focus:shadow-outline focus:outline-none">{{ $textButton }}</button>

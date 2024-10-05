@@ -1,23 +1,26 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro de Suportes</title>
-    <!-- CSS Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
-<body>
-    <h1 class="text-center">Novo Suporte</h1>
+@extends('admin.layouts.app')
 
-    <x-alert/>
+@section("title", "Novo Tópico")
 
-    <div class="align-items-center">
-        <form action="{{ route('supports.store') }}" method="POST" class="g-3 p-5 mx-5">
-            @include('admin.partials.form')
-            @section('action', 'Criar')
-        </form>
-    </div>
-</body>
-</html>
+@section('header')
+<h1 class="text-lg text-black-500">Nova dúvida</h1>
+@endsection
+
+@section('content')
+<form action="{{ route('supports.store') }}" method="POST">
+    @include('admin.partials.form', [
+        'textButton' => 'Nova dúvida'
+    ])
+</form>
+@endsection
+
+{{-- <div class="align-items-center"> --}}
+    {{-- <form action="{{ route('supports.store') }}" method="POST" class="p-5 mx-5 g-3"> --}}
+        {{-- @include('admin.partials.form') --}}
+        {{-- @section('action', 'Criar') --}}
+    {{-- </form> --}}
+{{-- </div> --}}
+
+{{-- @section('flashMessage')
+@include('admin.partials.flashMessage')
+@endsection --}}
