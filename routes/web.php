@@ -7,10 +7,11 @@ use App\Http\Controllers\Api\SupportAPIController;
 use App\Http\Controllers\ProfileController;
 
 //  Route::resource('/supports', SupportController::class]);
+Route::get("/", [SupportController::class, 'index'])->name("supports.index");
+
 Route::middleware(['auth:sanctum'])->group(function(){
     Route::get("/supports/{id}/edit", [SupportController::class, 'edit'])->name('supports.edit');
 
-    Route::get("/", [SupportController::class, 'index'])->name("supports.index");
 
     // Route::get("/home", function(){
     //     return view('welcome');

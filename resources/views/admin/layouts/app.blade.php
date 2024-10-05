@@ -14,7 +14,7 @@
     @if (Route::has('login'))
         <x-navbar/>
     @endif
-    <section class="container px-4 py-4 mx-auto">
+    <section id="sc" class="container px-4 py-6 mx-auto max-w-1/2">
         <header>
             @yield('header')
         </header>

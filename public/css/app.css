@@ -1,1 +1,25 @@
 @charset "UTF-8";
+
+body{
+    background-image: url('../cover.jpg');
+    width: 100%;
+    height: 540px;
+    background-attachment: local;
+    background-repeat: no-repeat;
+    /* background-image: url(img); */
+    background-size: cover;
+    background-position: center top;
+}
+
+#navbar{
+    -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(150px);
+}
+
+#table{
+    margin: auto; !important
+}
+
+#sc{
+    max-width: 1200px; !important
+}
