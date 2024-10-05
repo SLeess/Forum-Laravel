@@ -11,41 +11,38 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function auth(AuthRequest $request)
-    {
-        $user = User::where('email', $request->email)->first();
-        if (!$user || !Hash::check($request->password, $user->password)) {
+    public function auth(AuthRequest $request){
+        $user = User::where('email', $request->get('email'))->first();
+
+                        //criptografa a senha e verifica se bate
+        if(!$user || ! Hash::check($request->password, $user->password)){
             throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect']
+                'email' => ['The provited credentials are incorrect']
             ]);
         }
 
-        // Logout others devices
-        // if ($request->has('logout_others_devices'))
-        $user->tokens()->delete();
+        //Logout others devices
+        // if($request->has('logout_others_devices'))
+            $user->tokens()->delete();
 
         $token = $user->createToken($request->device_name)->plainTextToken;
-
         return response()->json([
             'token' => $token,
         ]);
     }
 
-    public function logout(Request $request)
-    {
-        $request->user()->tokens()->delete();
+    public function logout(){
+        auth()->user()->tokens()->delete();
 
         return response()->json([
             'message' => 'success',
         ]);
     }
 
-    public function me(Request $request)
-    {
+    public function me(Request $request){
         $user = $request->user();
-
         return response()->json([
-            'me' => $user,
+            'user' => $user,
         ]);
     }
 }

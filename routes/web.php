@@ -7,23 +7,30 @@ use App\Http\Controllers\Api\SupportAPIController;
 use App\Http\Controllers\ProfileController;
 
 //  Route::resource('/supports', SupportController::class]);
+Route::middleware(['auth:sanctum'])->group(function(){
+    Route::get("/supports/{id}/edit", [SupportController::class, 'edit'])->name('supports.edit');
 
-Route::get("/supports/{id}/edit", [SupportController::class, 'edit'])->name('supports.edit');
+    Route::get("/", [SupportController::class, 'index'])->name("supports.index");
 
-Route::get("/", [SupportController::class, 'index'])->name("supports.index");
+    // Route::get("/home", function(){
+    //     return view('welcome');
+    // });
 
-Route::get("/supports/create", [SupportController::class, 'create'])->name('supports.create');
+    Route::get("/supports/create", [SupportController::class, 'create'])->name('supports.create');
 
-Route::post('/supports/store', [SupportController::class, 'store'])->name('supports.store');
+    Route::post('/supports/store', [SupportController::class, 'store'])->name('supports.store');
 
-//tipo put ou patch para updates
-Route::put('/supports/{id}', [SupportController::class, 'update'])->name('supports.update');
+    //tipo put ou patch para updates
+    Route::put('/supports/{id}', [SupportController::class, 'update'])->name('supports.update');
 
-Route::get("/supports/{id}", [SupportController::class, 'show'])->name('supports.show');
-//as urls de rotas podem ser repetidas desde que o método HTTP seja diferente,
+    Route::get("/supports/{id}", [SupportController::class, 'show'])->name('supports.show');
+    //as urls de rotas podem ser repetidas desde que o método HTTP seja diferente,
 
-Route::delete('/supports/{id}', [SupportController::class, 'destroy'])->name('supports.destroy');
+    Route::delete('/supports/{id}', [SupportController::class, 'destroy'])->name('supports.destroy');
 
+
+    // Route::get('/me', [AuthController::class, 'me']);
+});
 
 /*
  *-----------API-----------------
