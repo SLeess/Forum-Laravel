@@ -1,5 +1,5 @@
 <p align="center">
- <img width="100px" src="public/img/logo.svg" align="center" alt="Logo" />
+<!--  <img width="100px" src="public/img/logo.svg" align="center" alt="Logo" /> -->
  <h2 align="center">Support System</h2>
 
 > [!NOTE]\
